@@ -1,0 +1,19 @@
+# DAX measure
+
+
+Growth1 = 
+VAR __Stock = CALCULATE(SUM('Historical Data'[quantity]), DATESMTD('Manually Historical Data'[date]))
+VAR __PM = CALCULATE(SUM('Historical Data'[quantity]), 
+                    DATESMTD(PREVIOUSMONTH('Historical Data'[date]))
+                    )
+RETURN
+IF(
+    NOT(ISEMPTY('Historical Data')) && NOT(ISBLANK(__PM)) && HASONEVALUE('Historical Data'[date]),
+    SWITCH(
+        TRUE(),
+        __Stock > __PM, 1,
+        __Stock = __PM, 0,
+        __Stock < __PM, -1
+    ),
+    BLANK()
+)
