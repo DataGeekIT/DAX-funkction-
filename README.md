@@ -1,4 +1,4 @@
-# DAX-funkction
+# DAX-funkction- increase, decrease, or no change in the metric
 
 **Calculation Name: Growth1**
 
